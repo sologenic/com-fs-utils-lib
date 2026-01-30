@@ -1,5 +1,5 @@
 import _m0 from "protobufjs/minimal";
-import { Decimal } from "../sologenic/com-fs-utils-lib/go/decimal/decimal";
+import { Decimal } from "../sologenic/com-fs-utils-lib/models/decimal/decimal";
 export declare const protobufPackage = "commission";
 export declare enum CommissionType {
     NOT_USED_COMMISSION_TYPE = 0,

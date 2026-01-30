@@ -1,0 +1,11 @@
+// NOTE: If you're importing this `Decimal` message in another proto file, make sure to include a corresponding `protoc` command in your build script to properly generate the Go and gRPC code.
+syntax = "proto3";
+
+package decimal;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/decimal;decimal";
+
+message Decimal {
+    int64 Value = 1;
+    int32 Exp = 2;
+}
