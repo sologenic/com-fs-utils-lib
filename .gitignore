@@ -1,0 +1,5 @@
+tmp
+.DS_Store
+.vscode/linenote
+models/node_modules
+node_modules

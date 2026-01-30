@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package httpmethod;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/http-method;httpmethod";
+
+enum Method {
+    GET = 0;
+    POST = 1;
+    PUT = 2;
+    DELETE = 3;
+}

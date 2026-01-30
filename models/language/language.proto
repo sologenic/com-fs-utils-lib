@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package language;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/language;language";
+
+enum Lang {
+    LANG_NOT_USED = 0;
+    ENGLISH = 1;
+    SPANISH = 2;
+    KOREAN = 3;
+}
+
+message Language {
+    Lang Language = 1;
+    bool UserConfigured = 2;
+}

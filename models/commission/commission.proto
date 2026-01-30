@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package commission;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/commission;commission";
+
+import "sologenic/com-fs-utils-lib/go/decimal/decimal.proto";
+
+// Broker API specific commission fields for user level (overrrides organization level)
+message CommissionSettings {
+  optional decimal.Decimal Commission = 25; // Commission charged for the order
+  optional CommissionType CommissionType = 26; // How commission field value is calculated
+}
+
+enum CommissionType {
+  NOT_USED_COMMISSION_TYPE = 0;
+  NOTIONAL = 1; // Charge commission on a per order basis (default)
+  QTY = 2; // Charge commission on a per qty/contract basis, pro rated
+  BPS = 3; // Commission expressed in basis points (percent), converted to notional amount for purposes of calculating commission(max two decimal places)
+}

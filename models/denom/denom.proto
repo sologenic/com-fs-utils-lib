@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package denom;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/denom;denom";
+
+message TokenPair {
+    Denom Maker = 1;
+    Denom Taker = 2;
+}
+
+message Denom {
+    string Currency = 1;
+    string Issuer = 2;
+    optional int32 Precision = 3;
+    bool IsIBC = 4;
+}

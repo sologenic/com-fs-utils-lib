@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package role;
+
+option go_package = "github.com/sologenic/com-fs-utils-lib/models/role;role";
+
+enum Role {
+    option allow_alias = true;
+    NOT_USED_ROLE = 0;
+    NORMAL_USER = 1;
+    VIEWER = 2;
+    BROKER_ASSET_ADMINISTRATOR = 3;
+    ORGANIZATION_ADMINISTRATOR = 4;
+    BROKER_ASSET_VIEWER = 5;
+    SOLOGENIC_ADMINISTRATOR = 6; // Highest level of administrator. Can only create new Organizations and assign an initial administrator in there
+    TX_ADMINISTRATOR = 6; // Alias for SOLOGENIC_ADMINISTRATOR
+    KYC_ADMINISTRATOR = 7;
+}
