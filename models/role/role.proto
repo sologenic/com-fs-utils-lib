@@ -15,4 +15,12 @@ enum Role {
     SOLOGENIC_ADMINISTRATOR = 6; // Highest level of administrator. Can only create new Organizations and assign an initial administrator in there
     TX_ADMINISTRATOR = 6; // Alias for SOLOGENIC_ADMINISTRATOR
     KYC_ADMINISTRATOR = 7;
+    TX_ACCOUNT_MANAGER = 8;      // Manages partners and partner assignments
+    TX_USER_MANAGER = 9;         // Manages user/referral aspects
+    PARTNER_BROKER_ADMIN = 10;   // Can manage partner users for broker partner, and view partner dashboard
+    PARTNER_BROKER_ACCOUNT_MANAGER = 11;// Day-to-day broker ops, create orgs via wizard, approvals if allowed
+
+    // Partner scope hierarchy for sales channel 
+    PARTNER_SALES_ADMIN = 12;
+    PARTNER_SALES_ACCOUNT_MANAGER = 13;
 }

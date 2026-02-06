@@ -4,7 +4,7 @@ package commission;
 
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/commission;commission";
 
-import "sologenic/com-fs-utils-lib/models/decimal/decimal.proto";
+import "decimal/decimal.proto";
 
 // Broker API specific commission fields for user level (overrrides organization level)
 message CommissionSettings {
