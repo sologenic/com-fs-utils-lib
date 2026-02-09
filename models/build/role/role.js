@@ -8,16 +8,19 @@ export const protobufPackage = "role";
 export var Role;
 (function (Role) {
     Role[Role["NOT_USED_ROLE"] = 0] = "NOT_USED_ROLE";
+    /** NORMAL_USER - Standard User Roles, not used in account management */
     Role[Role["NORMAL_USER"] = 1] = "NORMAL_USER";
+    /** VIEWER - Reserved for future use */
     Role[Role["VIEWER"] = 2] = "VIEWER";
+    /** BROKER_ASSET_ADMINISTRATOR - Broker & Asset Management Roles for an organization */
     Role[Role["BROKER_ASSET_ADMINISTRATOR"] = 3] = "BROKER_ASSET_ADMINISTRATOR";
     Role[Role["ORGANIZATION_ADMINISTRATOR"] = 4] = "ORGANIZATION_ADMINISTRATOR";
     Role[Role["BROKER_ASSET_VIEWER"] = 5] = "BROKER_ASSET_VIEWER";
+    Role[Role["KYC_ADMINISTRATOR"] = 7] = "KYC_ADMINISTRATOR";
     /** SOLOGENIC_ADMINISTRATOR - Core TX admin roles */
     Role[Role["SOLOGENIC_ADMINISTRATOR"] = 6] = "SOLOGENIC_ADMINISTRATOR";
     /** TX_ADMINISTRATOR - Alias for SOLOGENIC_ADMINISTRATOR */
     Role[Role["TX_ADMINISTRATOR"] = 6] = "TX_ADMINISTRATOR";
-    Role[Role["KYC_ADMINISTRATOR"] = 7] = "KYC_ADMINISTRATOR";
     /** TX_ACCOUNT_MANAGER - Manages partners and partner assignments */
     Role[Role["TX_ACCOUNT_MANAGER"] = 8] = "TX_ACCOUNT_MANAGER";
     /** TX_USER_MANAGER - Manages user/referral aspects */
@@ -53,15 +56,15 @@ export function roleFromJSON(object) {
         case 5:
         case "BROKER_ASSET_VIEWER":
             return Role.BROKER_ASSET_VIEWER;
+        case 7:
+        case "KYC_ADMINISTRATOR":
+            return Role.KYC_ADMINISTRATOR;
         case 6:
         case "SOLOGENIC_ADMINISTRATOR":
             return Role.SOLOGENIC_ADMINISTRATOR;
         case 6:
         case "TX_ADMINISTRATOR":
             return Role.TX_ADMINISTRATOR;
-        case 7:
-        case "KYC_ADMINISTRATOR":
-            return Role.KYC_ADMINISTRATOR;
         case 8:
         case "TX_ACCOUNT_MANAGER":
             return Role.TX_ACCOUNT_MANAGER;
@@ -103,12 +106,12 @@ export function roleToJSON(object) {
             return "ORGANIZATION_ADMINISTRATOR";
         case Role.BROKER_ASSET_VIEWER:
             return "BROKER_ASSET_VIEWER";
+        case Role.KYC_ADMINISTRATOR:
+            return "KYC_ADMINISTRATOR";
         case Role.SOLOGENIC_ADMINISTRATOR:
             return "SOLOGENIC_ADMINISTRATOR";
         case Role.TX_ADMINISTRATOR:
             return "TX_ADMINISTRATOR";
-        case Role.KYC_ADMINISTRATOR:
-            return "KYC_ADMINISTRATOR";
         case Role.TX_ACCOUNT_MANAGER:
             return "TX_ACCOUNT_MANAGER";
         case Role.TX_USER_MANAGER:

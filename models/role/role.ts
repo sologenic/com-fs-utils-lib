@@ -10,16 +10,19 @@ export const protobufPackage = "role";
 
 export enum Role {
   NOT_USED_ROLE = 0,
+  /** NORMAL_USER - Standard User Roles, not used in account management */
   NORMAL_USER = 1,
+  /** VIEWER - Reserved for future use */
   VIEWER = 2,
+  /** BROKER_ASSET_ADMINISTRATOR - Broker & Asset Management Roles for an organization */
   BROKER_ASSET_ADMINISTRATOR = 3,
   ORGANIZATION_ADMINISTRATOR = 4,
   BROKER_ASSET_VIEWER = 5,
+  KYC_ADMINISTRATOR = 7,
   /** SOLOGENIC_ADMINISTRATOR - Core TX admin roles */
   SOLOGENIC_ADMINISTRATOR = 6,
   /** TX_ADMINISTRATOR - Alias for SOLOGENIC_ADMINISTRATOR */
   TX_ADMINISTRATOR = 6,
-  KYC_ADMINISTRATOR = 7,
   /** TX_ACCOUNT_MANAGER - Manages partners and partner assignments */
   TX_ACCOUNT_MANAGER = 8,
   /** TX_USER_MANAGER - Manages user/referral aspects */
@@ -56,15 +59,15 @@ export function roleFromJSON(object: any): Role {
     case 5:
     case "BROKER_ASSET_VIEWER":
       return Role.BROKER_ASSET_VIEWER;
+    case 7:
+    case "KYC_ADMINISTRATOR":
+      return Role.KYC_ADMINISTRATOR;
     case 6:
     case "SOLOGENIC_ADMINISTRATOR":
       return Role.SOLOGENIC_ADMINISTRATOR;
     case 6:
     case "TX_ADMINISTRATOR":
       return Role.TX_ADMINISTRATOR;
-    case 7:
-    case "KYC_ADMINISTRATOR":
-      return Role.KYC_ADMINISTRATOR;
     case 8:
     case "TX_ACCOUNT_MANAGER":
       return Role.TX_ACCOUNT_MANAGER;
@@ -107,12 +110,12 @@ export function roleToJSON(object: Role): string {
       return "ORGANIZATION_ADMINISTRATOR";
     case Role.BROKER_ASSET_VIEWER:
       return "BROKER_ASSET_VIEWER";
+    case Role.KYC_ADMINISTRATOR:
+      return "KYC_ADMINISTRATOR";
     case Role.SOLOGENIC_ADMINISTRATOR:
       return "SOLOGENIC_ADMINISTRATOR";
     case Role.TX_ADMINISTRATOR:
       return "TX_ADMINISTRATOR";
-    case Role.KYC_ADMINISTRATOR:
-      return "KYC_ADMINISTRATOR";
     case Role.TX_ACCOUNT_MANAGER:
       return "TX_ACCOUNT_MANAGER";
     case Role.TX_USER_MANAGER:
