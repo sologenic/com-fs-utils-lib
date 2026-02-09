@@ -7,16 +7,22 @@ option go_package = "github.com/sologenic/com-fs-utils-lib/models/role;role";
 enum Role {
     option allow_alias = true;
     NOT_USED_ROLE = 0;
+
+    // Standard User Roles, not used in account management
     NORMAL_USER = 1;
+
+    // Reserved for future use
     VIEWER = 2;
+
+    // Broker & Asset Management Roles for an organization
     BROKER_ASSET_ADMINISTRATOR = 3;
     ORGANIZATION_ADMINISTRATOR = 4;
     BROKER_ASSET_VIEWER = 5;
+    KYC_ADMINISTRATOR = 7;
 
     // Core TX admin roles
     SOLOGENIC_ADMINISTRATOR = 6; // Highest level of administrator. Can only create new Organizations and assign an initial administrator in there
     TX_ADMINISTRATOR = 6; // Alias for SOLOGENIC_ADMINISTRATOR
-    KYC_ADMINISTRATOR = 7;
     TX_ACCOUNT_MANAGER = 8;      // Manages partners and partner assignments
     TX_USER_MANAGER = 9;         // Manages user/referral aspects
     TX_MARKETING_MANAGER = 20;   // Manages marketing aspects
