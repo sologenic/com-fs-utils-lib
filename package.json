@@ -4,7 +4,7 @@
   "description": "Full stack models",
   "main": "models/build/index.js",
   "scripts": {
-    "build": "cd models && rm -rf ./build && npx tsc -p tsconfig.json"
+    "build": "cd models && npx tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",

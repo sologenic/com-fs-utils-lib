@@ -6,7 +6,7 @@ export declare enum Role {
     BROKER_ASSET_ADMINISTRATOR = 3,
     ORGANIZATION_ADMINISTRATOR = 4,
     BROKER_ASSET_VIEWER = 5,
-    /** SOLOGENIC_ADMINISTRATOR - Highest level of administrator. Can only create new Organizations and assign an initial administrator in there */
+    /** SOLOGENIC_ADMINISTRATOR - Core TX admin roles */
     SOLOGENIC_ADMINISTRATOR = 6,
     /** TX_ADMINISTRATOR - Alias for SOLOGENIC_ADMINISTRATOR */
     TX_ADMINISTRATOR = 6,
@@ -15,7 +15,9 @@ export declare enum Role {
     TX_ACCOUNT_MANAGER = 8,
     /** TX_USER_MANAGER - Manages user/referral aspects */
     TX_USER_MANAGER = 9,
-    /** PARTNER_BROKER_ADMIN - Can manage partner users for broker partner, and view partner dashboard */
+    /** TX_MARKETING_MANAGER - Manages marketing aspects */
+    TX_MARKETING_MANAGER = 20,
+    /** PARTNER_BROKER_ADMIN - Partner scope hierarchy for broker */
     PARTNER_BROKER_ADMIN = 10,
     /** PARTNER_BROKER_ACCOUNT_MANAGER - Day-to-day broker ops, create orgs via wizard, approvals if allowed */
     PARTNER_BROKER_ACCOUNT_MANAGER = 11,
