@@ -1,0 +1,81 @@
+# Models Directory Rules
+
+This directory contains Protocol Buffer (protobuf) model definitions that are shared across the project. These models are primarily enums and small reusable message types that don't have a clearly defined place in the main project structure.
+
+## Structure
+
+- Each model lives in its own subdirectory (e.g., `role/`, `decimal/`, `metadata/`)
+- Each subdirectory contains:
+  - `*.proto` - Protocol Buffer definition file
+  - `*.pb.go` - Generated Go code
+  - `*.ts` - Generated TypeScript code
+  - `go.mod` - Go module for isolation and versioning
+  - `README.md` - Documentation for the model
+
+## Protocol Buffer Guidelines
+
+### When Working with Proto Files
+
+1. **Syntax**: Always use `proto3` syntax
+2. **Package naming**: Use lowercase, underscore-separated names (e.g., `orderproperties`, `httpmethod`)
+3. **Go package**: Set `option go_package` following the pattern: `github.com/sologenic/com-fs-utils-lib/models/{folder};{package}`
+4. **Field naming**: Use PascalCase for field names (e.g., `ChangedBy`, `CommissionType`)
+5. **Enum values**: Use UPPER_SNAKE_CASE with descriptive prefixes (e.g., `NOT_USED_ROLE`, `SIDE_BUY`)
+6. **Default values**: Avoid using `0` as a meaningful enum value. Use `NOT_USED_*` or `*_DO_NOT_USE` patterns instead
+7. **Optional fields**: Use `optional` keyword for fields that may not be set
+8. **Comments**: Add clear comments explaining the purpose of messages, enums, and complex fields
+
+### Import Guidelines
+
+- Import other models using relative paths: `import "decimal/decimal.proto"`
+- Import Google protobuf types: `import "google/protobuf/timestamp.proto"`
+- Ensure imported proto files are available in the proto path
+
+### After Making Changes
+
+1. **Always regenerate code** after modifying `.proto` files:
+   ```bash
+   ./bin/build.sh
+   ```
+   This generates:
+   - Go files: `*.pb.go`, `*_grpc.pb.go`
+   - TypeScript files: `*.ts`
+   - Build artifacts in `build/` directory
+
+2. **Update README.md** in the model's directory to document:
+   - Purpose and use cases
+   - Available messages/enums and their fields
+   - Usage examples (if applicable)
+   - Important notes or constraints
+
+3. **Commit generated files**: The build script automatically stages generated files, but verify they're correct before committing
+
+## Model Design Principles
+
+- **Keep models small and focused**: Each model should represent a single concept
+- **Reusability**: Models should be reusable across different parts of the application
+- **Isolation**: Each model has its own `go.mod` for version management
+- **Cross-language compatibility**: Models must work for both Go and TypeScript generation
+
+## Common Patterns
+
+### Enums
+- Always include a `NOT_USED_*` or `*_DO_NOT_USE` value at `0`
+- Use descriptive names that indicate the enum's purpose
+- Consider using `allow_alias = true` if you need aliases (e.g., `TX_ADMINISTRATOR = 6; // Alias for SOLOGENIC_ADMINISTRATOR`)
+
+### Messages
+- Use clear, descriptive message names
+- Document complex fields with inline comments
+- Consider backward compatibility when adding new fields
+
+### Decimal Handling
+- Use the `decimal.Decimal` message type for precise decimal calculations
+- Never convert to float/double for calculations
+- Use `decimal.New()` from `github.com/shopspring/decimal` in Go
+
+## Testing
+
+- When adding new models, ensure they generate correctly for both Go and TypeScript
+- Verify that imports resolve correctly
+- Test that the generated code compiles without errors
