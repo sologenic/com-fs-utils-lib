@@ -1,5 +1,13 @@
-tmp
 .DS_Store
 .vscode/linenote
 models/node_modules
 node_modules
+
+tmp/
+.idea/
+nohup.out
+go.work
+go.work.sum
+node_modules/
+__debug_bin*
+.env.local
