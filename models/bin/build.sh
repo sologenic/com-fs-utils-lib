@@ -42,7 +42,7 @@ build_model() {
         echo "  Generating Go files for: $proto"
         protoc \
             --proto_path=. \
-            --proto_path="$(go env GOPATH)/src" \
+            --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
             --go_out=. \
             --go_opt=paths=source_relative \
             "$proto"
@@ -61,7 +61,7 @@ build_model() {
             --ts_proto_out=. \
             --ts_proto_opt=esModuleInterop=true \
             --proto_path=. \
-            --proto_path="$(go env GOPATH)/src" \
+            --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
             "$proto"
     done
     
@@ -97,7 +97,7 @@ build_all() {
         echo "  Generating Go files for: $proto"
         protoc \
             --proto_path=. \
-            --proto_path="$(go env GOPATH)/src" \
+            --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
             --go_out=. \
             --go_opt=paths=source_relative \
             "$proto"
@@ -118,7 +118,7 @@ build_all() {
             --ts_proto_out=. \
             --ts_proto_opt=esModuleInterop=true \
             --proto_path=. \
-            --proto_path="$(go env GOPATH)/src" \
+            --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
             "$proto"
     done
     

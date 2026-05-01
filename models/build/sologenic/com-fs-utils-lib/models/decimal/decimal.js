@@ -2,7 +2,7 @@
 // versions:
 //   protoc-gen-ts_proto  v1.181.2
 //   protoc               v6.33.6
-// source: decimal/decimal.proto
+// source: sologenic/com-fs-utils-lib/models/decimal/decimal.proto
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
