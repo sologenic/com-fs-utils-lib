@@ -7,8 +7,10 @@ export declare enum Role {
     VIEWER = 2,
     /** BROKER_ASSET_ADMINISTRATOR - Broker & Asset Management Roles for an organization */
     BROKER_ASSET_ADMINISTRATOR = 3,
+    /** ORGANIZATION_ADMINISTRATOR - Used both in tx and org management */
     ORGANIZATION_ADMINISTRATOR = 4,
     BROKER_ASSET_VIEWER = 5,
+    /** KYC_ADMINISTRATOR - Used both in tx and org management */
     KYC_ADMINISTRATOR = 7,
     /** SOLOGENIC_ADMINISTRATOR - Core TX admin roles */
     SOLOGENIC_ADMINISTRATOR = 6,
