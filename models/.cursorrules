@@ -62,7 +62,6 @@ This directory contains Protocol Buffer (protobuf) model definitions that are sh
 ### Enums
 - Always include a `NOT_USED_*` or `*_DO_NOT_USE` value at `0`
 - Use descriptive names that indicate the enum's purpose
-- Consider using `allow_alias = true` if you need aliases (e.g., `TX_ADMINISTRATOR = 6; // Alias for SOLOGENIC_ADMINISTRATOR`)
 
 ### Messages
 - Use clear, descriptive message names

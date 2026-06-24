@@ -42,7 +42,7 @@ The roles follow a hierarchical structure:
 1. **Standard Users**: `NORMAL_USER`
 2. **Broker Roles**: `BROKER_ASSET_ADMINISTRATOR`
 3. **Organization Roles**: `ORGANIZATION_ADMINISTRATOR`
-4. **System Roles**: `SOLOGENIC_ADMINISTRATOR` / `TX_ADMINISTRATOR` (highest level)
+4. **System Roles**: `TX_ADMINISTRATOR` (highest level)
 5. **Specialized Roles**: `KYC_ADMINISTRATOR`, `TX_ACCOUNT_MANAGER`
 6. **Partner Roles**: Broker and Sales channel scopes
 
@@ -51,7 +51,7 @@ The roles follow a hierarchical structure:
 ### Alias Support
 
 The enum uses `allow_alias = true` to support:
-- `SOLOGENIC_ADMINISTRATOR` and `TX_ADMINISTRATOR` both map to value `6`
+- `TX_ADMINISTRATOR` both map to value `6`
 - This allows different naming conventions while maintaining the same permission level
 
 ### Scope Hierarchy
@@ -72,6 +72,6 @@ Partner roles are organized by scope:
 ## Notes
 
 - Roles are stored in the database and referenced by their numeric values
-- The `SOLOGENIC_ADMINISTRATOR` role has the highest privileges and can create organizations
+- The `TX_ADMINISTRATOR` role has the highest privileges and can create organizations
 - Partner roles are scoped to specific operational areas (broker vs sales)
 - Always use `NOT_USED_ROLE` (0) as the default to catch uninitialized role values
