@@ -1,4 +1,3 @@
-export * from "./denom"
 export * from "./http-method"
 export * from "./metadata"
 export * from "./role"

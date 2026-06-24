@@ -12,23 +12,16 @@ export enum Role {
   NOT_USED_ROLE = 0,
   /** NORMAL_USER - Standard User Roles, not used in account management */
   NORMAL_USER = 1,
-  /** VIEWER - Reserved for future use */
-  VIEWER = 2,
   /** BROKER_ASSET_ADMINISTRATOR - Broker & Asset Management Roles for an organization */
   BROKER_ASSET_ADMINISTRATOR = 3,
   /** ORGANIZATION_ADMINISTRATOR - Used both in tx and org management */
   ORGANIZATION_ADMINISTRATOR = 4,
-  BROKER_ASSET_VIEWER = 5,
   /** KYC_ADMINISTRATOR - Used both in tx and org management */
   KYC_ADMINISTRATOR = 7,
-  /** SOLOGENIC_ADMINISTRATOR - Core TX admin roles */
-  SOLOGENIC_ADMINISTRATOR = 6,
-  /** TX_ADMINISTRATOR - Alias for SOLOGENIC_ADMINISTRATOR */
+  /** TX_ADMINISTRATOR - Core TX admin roles */
   TX_ADMINISTRATOR = 6,
   /** TX_ACCOUNT_MANAGER - Manages partners and partner assignments */
   TX_ACCOUNT_MANAGER = 8,
-  /** TX_USER_MANAGER - Manages user/referral aspects */
-  TX_USER_MANAGER = 9,
   /** TX_MARKETING_MANAGER - Manages marketing aspects */
   TX_MARKETING_MANAGER = 20,
   /** PARTNER_BROKER_ADMIN - Partner scope hierarchy for broker */
@@ -49,33 +42,21 @@ export function roleFromJSON(object: any): Role {
     case 1:
     case "NORMAL_USER":
       return Role.NORMAL_USER;
-    case 2:
-    case "VIEWER":
-      return Role.VIEWER;
     case 3:
     case "BROKER_ASSET_ADMINISTRATOR":
       return Role.BROKER_ASSET_ADMINISTRATOR;
     case 4:
     case "ORGANIZATION_ADMINISTRATOR":
       return Role.ORGANIZATION_ADMINISTRATOR;
-    case 5:
-    case "BROKER_ASSET_VIEWER":
-      return Role.BROKER_ASSET_VIEWER;
     case 7:
     case "KYC_ADMINISTRATOR":
       return Role.KYC_ADMINISTRATOR;
-    case 6:
-    case "SOLOGENIC_ADMINISTRATOR":
-      return Role.SOLOGENIC_ADMINISTRATOR;
     case 6:
     case "TX_ADMINISTRATOR":
       return Role.TX_ADMINISTRATOR;
     case 8:
     case "TX_ACCOUNT_MANAGER":
       return Role.TX_ACCOUNT_MANAGER;
-    case 9:
-    case "TX_USER_MANAGER":
-      return Role.TX_USER_MANAGER;
     case 20:
     case "TX_MARKETING_MANAGER":
       return Role.TX_MARKETING_MANAGER;
@@ -104,24 +85,16 @@ export function roleToJSON(object: Role): string {
       return "NOT_USED_ROLE";
     case Role.NORMAL_USER:
       return "NORMAL_USER";
-    case Role.VIEWER:
-      return "VIEWER";
     case Role.BROKER_ASSET_ADMINISTRATOR:
       return "BROKER_ASSET_ADMINISTRATOR";
     case Role.ORGANIZATION_ADMINISTRATOR:
       return "ORGANIZATION_ADMINISTRATOR";
-    case Role.BROKER_ASSET_VIEWER:
-      return "BROKER_ASSET_VIEWER";
     case Role.KYC_ADMINISTRATOR:
       return "KYC_ADMINISTRATOR";
-    case Role.SOLOGENIC_ADMINISTRATOR:
-      return "SOLOGENIC_ADMINISTRATOR";
     case Role.TX_ADMINISTRATOR:
       return "TX_ADMINISTRATOR";
     case Role.TX_ACCOUNT_MANAGER:
       return "TX_ACCOUNT_MANAGER";
-    case Role.TX_USER_MANAGER:
-      return "TX_USER_MANAGER";
     case Role.TX_MARKETING_MANAGER:
       return "TX_MARKETING_MANAGER";
     case Role.PARTNER_BROKER_ADMIN:
