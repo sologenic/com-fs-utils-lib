@@ -1,7 +1,6 @@
 .DS_Store
 .vscode/linenote
 models/node_modules/
-models/build/
 node_modules
 
 tmp/
