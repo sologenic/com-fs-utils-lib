@@ -10,24 +10,20 @@ Represents all available user roles in the system, organized in a hierarchical s
 
 - **`NOT_USED_ROLE`** (0): Default/unused value
 - **`NORMAL_USER`** (1): Standard user with basic permissions
-- **`VIEWER`** (2): Read-only access role
 
 ### Broker & Asset Management Roles
 
 - **`BROKER_ASSET_ADMINISTRATOR`** (3): Administrator with full control over broker assets
-- **`BROKER_ASSET_VIEWER`** (5): Read-only access to broker assets
 
 ### Organization & Administrative Roles
 
 - **`ORGANIZATION_ADMINISTRATOR`** (4): Administrator for an organization with full organizational control
-- **`SOLOGENIC_ADMINISTRATOR`** (6): Highest level administrator. Can create new organizations and assign initial administrators
-- **`TX_ADMINISTRATOR`** (6): Alias for `SOLOGENIC_ADMINISTRATOR` (uses `allow_alias = true`)
+- **`TX_ADMINISTRATOR`** (6): Highest level administrator. Can create new organizations and assign initial administrators
 - **`KYC_ADMINISTRATOR`** (7): Administrator responsible for Know Your Customer (KYC) operations
 
 ### Transaction & User Management Roles
 
 - **`TX_ACCOUNT_MANAGER`** (8): Manages partners and partner assignments
-- **`TX_USER_MANAGER`** (9): Manages user/referral aspects
 
 ### Partner Roles - Broker Scope
 
@@ -43,11 +39,11 @@ Represents all available user roles in the system, organized in a hierarchical s
 
 The roles follow a hierarchical structure:
 
-1. **Standard Users**: `NORMAL_USER`, `VIEWER`
-2. **Broker Roles**: `BROKER_ASSET_ADMINISTRATOR`, `BROKER_ASSET_VIEWER`
+1. **Standard Users**: `NORMAL_USER`
+2. **Broker Roles**: `BROKER_ASSET_ADMINISTRATOR`
 3. **Organization Roles**: `ORGANIZATION_ADMINISTRATOR`
 4. **System Roles**: `SOLOGENIC_ADMINISTRATOR` / `TX_ADMINISTRATOR` (highest level)
-5. **Specialized Roles**: `KYC_ADMINISTRATOR`, `TX_ACCOUNT_MANAGER`, `TX_USER_MANAGER`
+5. **Specialized Roles**: `KYC_ADMINISTRATOR`, `TX_ACCOUNT_MANAGER`
 6. **Partner Roles**: Broker and Sales channel scopes
 
 ## Important Notes
