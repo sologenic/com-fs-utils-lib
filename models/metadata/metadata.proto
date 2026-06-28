@@ -3,12 +3,17 @@ syntax = "proto3";
 package metadata;
 
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/metadata;metadata";
 
 message MetaData {
-    // mainnet, testnet, devnet, can also be some virtually defined network (extra devnet for testing, extra mainnnet node for scanning historical blocks, etc)
-    Network Network = 1; 
+    Network Network = 1 [
+      (buf.validate.field).enum = {
+        defined_only: true,
+        in: [1, 2]
+      }
+    ];
     google.protobuf.Timestamp UpdatedAt = 2;
     google.protobuf.Timestamp CreatedAt = 3; // Internal to listener
     optional string UpdatedByAccount = 4;
@@ -19,5 +24,4 @@ enum Network {
     NETWORK_DO_NOT_USE = 0;
     MAINNET = 1;
     TESTNET = 2;
-    DEVNET = 3;
 }
