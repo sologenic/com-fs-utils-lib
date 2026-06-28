@@ -15,7 +15,6 @@ export enum Network {
   NETWORK_DO_NOT_USE = 0,
   MAINNET = 1,
   TESTNET = 2,
-  DEVNET = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -30,9 +29,6 @@ export function networkFromJSON(object: any): Network {
     case 2:
     case "TESTNET":
       return Network.TESTNET;
-    case 3:
-    case "DEVNET":
-      return Network.DEVNET;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -48,8 +44,6 @@ export function networkToJSON(object: Network): string {
       return "MAINNET";
     case Network.TESTNET:
       return "TESTNET";
-    case Network.DEVNET:
-      return "DEVNET";
     case Network.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -57,7 +51,6 @@ export function networkToJSON(object: Network): string {
 }
 
 export interface MetaData {
-  /** mainnet, testnet, devnet, can also be some virtually defined network (extra devnet for testing, extra mainnnet node for scanning historical blocks, etc) */
   Network: Network;
   UpdatedAt:
     | Date

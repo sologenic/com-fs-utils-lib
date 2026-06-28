@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+mkdir -p vendor/buf/validate
+curl https://raw.githubusercontent.com/bufbuild/protovalidate/refs/heads/main/proto/protovalidate/buf/validate/validate.proto > vendor/buf/validate/validate.proto
+
 PROTO_DIR=$(dirname $(dirname "$0"))
 cd $PROTO_DIR
 
@@ -43,6 +46,7 @@ build_model() {
         protoc \
             --proto_path=. \
             --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
+            --proto_path="$(git rev-parse --show-toplevel)/vendor" \
             --go_out=. \
             --go_opt=paths=source_relative \
             "$proto"
@@ -62,6 +66,7 @@ build_model() {
             --ts_proto_opt=esModuleInterop=true \
             --proto_path=. \
             --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
+            --proto_path="$(git rev-parse --show-toplevel)/vendor" \
             "$proto"
     done
     
@@ -98,6 +103,7 @@ build_all() {
         protoc \
             --proto_path=. \
             --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
+            --proto_path="$(git rev-parse --show-toplevel)/vendor" \
             --go_out=. \
             --go_opt=paths=source_relative \
             "$proto"
@@ -119,6 +125,7 @@ build_all() {
             --ts_proto_opt=esModuleInterop=true \
             --proto_path=. \
             --proto_path=$(dirname $(dirname "$(git rev-parse --show-toplevel)")) \
+            --proto_path="$(git rev-parse --show-toplevel)/vendor" \
             "$proto"
     done
     

@@ -13,7 +13,6 @@ export var Network;
     Network[Network["NETWORK_DO_NOT_USE"] = 0] = "NETWORK_DO_NOT_USE";
     Network[Network["MAINNET"] = 1] = "MAINNET";
     Network[Network["TESTNET"] = 2] = "TESTNET";
-    Network[Network["DEVNET"] = 3] = "DEVNET";
     Network[Network["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(Network || (Network = {}));
 export function networkFromJSON(object) {
@@ -27,9 +26,6 @@ export function networkFromJSON(object) {
         case 2:
         case "TESTNET":
             return Network.TESTNET;
-        case 3:
-        case "DEVNET":
-            return Network.DEVNET;
         case -1:
         case "UNRECOGNIZED":
         default:
@@ -44,8 +40,6 @@ export function networkToJSON(object) {
             return "MAINNET";
         case Network.TESTNET:
             return "TESTNET";
-        case Network.DEVNET:
-            return "DEVNET";
         case Network.UNRECOGNIZED:
         default:
             return "UNRECOGNIZED";
