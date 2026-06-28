@@ -1,25 +1,23 @@
 package metadata
 
 import (
-	"log"
 	"os"
 	"strings"
+
+	"github.com/sologenic/com-fs-utils-internal-lib/go/logger"
 )
 
-// ParseNetworkFromEnv parses the NETWORK environment variable to metadata.Network enum
-// Defaults to MAINNET if the environment variable is not set
-func ParseNetworkFromEnv() Network {
-	networkStr := strings.ToUpper(os.Getenv("NETWORK"))
+var network Network
 
-	switch networkStr {
-	case "MAINNET":
-		return Network_MAINNET
-	case "TESTNET":
-		return Network_TESTNET
-	case "DEVNET":
-		return Network_DEVNET
-	default:
-		log.Printf("Invalid or missing NETWORK env var '%s', defaulting to MAINNET", networkStr)
-		return Network_MAINNET
+func init() {
+	value := strings.ToUpper(os.Getenv("NETWORK"))
+	if value != "MAINNET" && value != "TESTNET" {
+		logger.Fatalf("NETWORK must be 'MAINNET' or 'TESTNET'")
 	}
+	network = Network(Network_value[value])
+}
+
+// GetNetwork Returns metadata.Network based on the NETWORK environment variable
+func GetNetwork() Network {
+	return network
 }
