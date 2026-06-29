@@ -5,26 +5,50 @@ package role;
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/role;role";
 
 enum Role {
-    NOT_USED_ROLE = 0;
+  NOT_USED_ROLE = 0;
 
-    // Standard User Roles, not used in account management
-    NORMAL_USER = 1;
+  // End-user role
+  NORMAL_USER = 1;
 
-    // Broker & Asset Management Roles for an organization
-    BROKER_ASSET_ADMINISTRATOR = 3;
-    ORGANIZATION_ADMINISTRATOR = 4; // Used both in tx and org management
-    KYC_ADMINISTRATOR = 7; // Used both in tx and org management
+  // Broker & asset management roles for an organization
+  BROKER_ASSET_ADMINISTRATOR = 3;
+  ORGANIZATION_ADMINISTRATOR = 4;
 
-    // Core TX admin roles
-    TX_ADMINISTRATOR = 6; // Highest level of administrator. Can only create new Organizations and assign an initial administrator in there
-    TX_ACCOUNT_MANAGER = 8;      // Manages partners and partner assignments
-    TX_MARKETING_MANAGER = 20;   // Manages marketing aspects
+  // TX staff roles
 
-    // Partner scope hierarchy for broker
-    PARTNER_BROKER_ADMIN = 10;   // Can manage partner users for broker partner, and view partner dashboard
-    PARTNER_BROKER_ACCOUNT_MANAGER = 11;// Day-to-day broker ops, create orgs via wizard, approvals if allowed
+  // Highest level of access including access to secrets and important settings
+  TX_SYSTEM_MANAGER = 21;
 
-    // Partner scope hierarchy for sales channel 
-    PARTNER_SALES_ADMIN = 12;
-    PARTNER_SALES_ACCOUNT_MANAGER = 13;
+  // Highest level of access excluding access to secrets and important settings
+  TX_ADMINISTRATOR = 6;
+
+  // Manages everything related to partners
+  // TODO: Rename to TX_PARTNERS_MANAGER
+  TX_ACCOUNT_MANAGER = 8;
+
+  // Manages marketing aspects
+  TX_MARKETING_MANAGER = 20;
+
+  // Manages user information, KYC stuff
+  // TODO: Rename to TX_KYC_MANAGER
+  KYC_ADMINISTRATOR = 7;
+
+  // Partner scope hierarchy for broker
+
+  // TODO: Rename (get rid of "admin" and replace with "manager")
+  PARTNER_BROKER_ADMIN = 10;
+
+  // Day-to-day operations
+  // TODO: Rename and think if it can be merged with PARTNER_BROKER_ADMIN
+  PARTNER_BROKER_ACCOUNT_MANAGER = 11;
+
+  // Partner scope hierarchy for sales channel
+
+  // TODO: Rename (get rid of "admin" and replace with "manager")
+  PARTNER_SALES_ADMIN = 12;
+
+  // Day-to-day operations
+  // TODO: Rename and think if it can be merged with PARTNER_SALES_ADMIN
+  PARTNER_SALES_ACCOUNT_MANAGER = 13;
+
 }
