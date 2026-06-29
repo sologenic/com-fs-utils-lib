@@ -3,11 +3,20 @@ syntax = "proto3";
 package audit;
 
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/audit;audit";
 
 message Audit {
-    string ChangedBy = 1;
+    string ChangedBy = 1 [
+      (buf.validate.field).string = {
+        max_len: 128,
+      }
+    ];
     google.protobuf.Timestamp ChangedAt = 2;
-    optional string Reason = 3;
+    optional string Reason = 3 [
+      (buf.validate.field).string = {
+        max_len: 512,
+      }
+    ];
 }

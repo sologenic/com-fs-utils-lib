@@ -4,6 +4,8 @@ package language;
 
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/language;language";
 
+import "buf/validate/validate.proto";
+
 enum Lang {
     LANG_NOT_USED = 0;
     ENGLISH = 1;
@@ -12,6 +14,8 @@ enum Lang {
 }
 
 message Language {
-    Lang Language = 1;
+    Lang Language = 1 [
+      (buf.validate.field).enum.defined_only = true
+    ];
     bool UserConfigured = 2;
 }

@@ -3,6 +3,7 @@ syntax = "proto3";
 package orderproperties;
 
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/order-properties;orderproperties";
 
@@ -35,7 +36,9 @@ enum OrderType {
 }
 
 message ProcessInfo {
-  ProcessState ProcessState = 1;
+  ProcessState ProcessState = 1 [
+    (buf.validate.field).enum.defined_only = true
+  ];
   google.protobuf.Timestamp ProcessedAt = 2;
 }
 
