@@ -12,3 +12,5 @@ node_modules/
 __debug_bin*
 .env.local
 vendor/
+
+dependencies/

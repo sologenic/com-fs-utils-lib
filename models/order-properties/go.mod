@@ -1,5 +1,5 @@
 module github.com/sologenic/com-fs-utils-lib/models/order-properties
 
-go 1.23.8
+go 1.26.2
 
-require google.golang.org/protobuf v1.36.6
+require google.golang.org/protobuf v1.36.11
