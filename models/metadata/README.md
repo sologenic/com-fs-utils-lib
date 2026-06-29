@@ -8,7 +8,7 @@ Contains common metadata fields used across various messages in the system.
 
 ### Fields
 
-- **`Network`** (Network, required): The blockchain network context (mainnet, testnet, devnet, or custom virtual networks)
+- **`Network`** (Network, required): The blockchain network context (mainnet, testnet)
 - **`UpdatedAt`** (google.protobuf.Timestamp, required): Timestamp of the last update
 - **`CreatedAt`** (google.protobuf.Timestamp, required): Timestamp of creation (internal to listener)
 - **`UpdatedByAccount`** (string, optional): Account identifier that performed the last update
@@ -16,8 +16,7 @@ Contains common metadata fields used across various messages in the system.
 ### Network Context
 
 The `Network` field supports:
-- Standard networks: mainnet, testnet, devnet
-- Custom virtual networks: Extra devnet instances for testing, additional mainnet nodes for historical block scanning, etc.
+- Standard networks: mainnet, testnet
 
 ## Enum: `Network`
 
@@ -28,7 +27,6 @@ Represents the blockchain network environment.
 - **`NETWORK_DO_NOT_USE`** (0): Reserved default value to avoid bugs from unset network values
 - **`MAINNET`** (1): Production mainnet network
 - **`TESTNET`** (2): Test network for development and testing
-- **`DEVNET`** (3): Development network for local development
 
 ### Why Avoid Default Value
 
