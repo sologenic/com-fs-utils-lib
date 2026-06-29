@@ -10,26 +10,40 @@ export const protobufPackage = "role";
 
 export enum Role {
   NOT_USED_ROLE = 0,
-  /** NORMAL_USER - Standard User Roles, not used in account management */
+  /** NORMAL_USER - End-user role */
   NORMAL_USER = 1,
-  /** BROKER_ASSET_ADMINISTRATOR - Broker & Asset Management Roles for an organization */
+  /** BROKER_ASSET_ADMINISTRATOR - Broker & asset management roles for an organization */
   BROKER_ASSET_ADMINISTRATOR = 3,
-  /** ORGANIZATION_ADMINISTRATOR - Used both in tx and org management */
   ORGANIZATION_ADMINISTRATOR = 4,
-  /** KYC_ADMINISTRATOR - Used both in tx and org management */
-  KYC_ADMINISTRATOR = 7,
-  /** TX_ADMINISTRATOR - Core TX admin roles */
+  /** TX_SYSTEM_MANAGER - Highest level of access including access to secrets and important settings */
+  TX_SYSTEM_MANAGER = 21,
+  /** TX_ADMINISTRATOR - Highest level of access excluding access to secrets and important settings */
   TX_ADMINISTRATOR = 6,
-  /** TX_ACCOUNT_MANAGER - Manages partners and partner assignments */
+  /**
+   * TX_ACCOUNT_MANAGER - Manages everything related to partners
+   * TODO: Rename to TX_PARTNERS_MANAGER
+   */
   TX_ACCOUNT_MANAGER = 8,
   /** TX_MARKETING_MANAGER - Manages marketing aspects */
   TX_MARKETING_MANAGER = 20,
-  /** PARTNER_BROKER_ADMIN - Partner scope hierarchy for broker */
+  /**
+   * KYC_ADMINISTRATOR - Manages user information, KYC stuff
+   * TODO: Rename to TX_KYC_MANAGER
+   */
+  KYC_ADMINISTRATOR = 7,
+  /** PARTNER_BROKER_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */
   PARTNER_BROKER_ADMIN = 10,
-  /** PARTNER_BROKER_ACCOUNT_MANAGER - Day-to-day broker ops, create orgs via wizard, approvals if allowed */
+  /**
+   * PARTNER_BROKER_ACCOUNT_MANAGER - Day-to-day operations
+   * TODO: Rename and think if it can be merged with PARTNER_BROKER_ADMIN
+   */
   PARTNER_BROKER_ACCOUNT_MANAGER = 11,
-  /** PARTNER_SALES_ADMIN - Partner scope hierarchy for sales channel */
+  /** PARTNER_SALES_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */
   PARTNER_SALES_ADMIN = 12,
+  /**
+   * PARTNER_SALES_ACCOUNT_MANAGER - Day-to-day operations
+   * TODO: Rename and think if it can be merged with PARTNER_SALES_ADMIN
+   */
   PARTNER_SALES_ACCOUNT_MANAGER = 13,
   UNRECOGNIZED = -1,
 }
@@ -48,9 +62,9 @@ export function roleFromJSON(object: any): Role {
     case 4:
     case "ORGANIZATION_ADMINISTRATOR":
       return Role.ORGANIZATION_ADMINISTRATOR;
-    case 7:
-    case "KYC_ADMINISTRATOR":
-      return Role.KYC_ADMINISTRATOR;
+    case 21:
+    case "TX_SYSTEM_MANAGER":
+      return Role.TX_SYSTEM_MANAGER;
     case 6:
     case "TX_ADMINISTRATOR":
       return Role.TX_ADMINISTRATOR;
@@ -60,6 +74,9 @@ export function roleFromJSON(object: any): Role {
     case 20:
     case "TX_MARKETING_MANAGER":
       return Role.TX_MARKETING_MANAGER;
+    case 7:
+    case "KYC_ADMINISTRATOR":
+      return Role.KYC_ADMINISTRATOR;
     case 10:
     case "PARTNER_BROKER_ADMIN":
       return Role.PARTNER_BROKER_ADMIN;
@@ -89,14 +106,16 @@ export function roleToJSON(object: Role): string {
       return "BROKER_ASSET_ADMINISTRATOR";
     case Role.ORGANIZATION_ADMINISTRATOR:
       return "ORGANIZATION_ADMINISTRATOR";
-    case Role.KYC_ADMINISTRATOR:
-      return "KYC_ADMINISTRATOR";
+    case Role.TX_SYSTEM_MANAGER:
+      return "TX_SYSTEM_MANAGER";
     case Role.TX_ADMINISTRATOR:
       return "TX_ADMINISTRATOR";
     case Role.TX_ACCOUNT_MANAGER:
       return "TX_ACCOUNT_MANAGER";
     case Role.TX_MARKETING_MANAGER:
       return "TX_MARKETING_MANAGER";
+    case Role.KYC_ADMINISTRATOR:
+      return "KYC_ADMINISTRATOR";
     case Role.PARTNER_BROKER_ADMIN:
       return "PARTNER_BROKER_ADMIN";
     case Role.PARTNER_BROKER_ACCOUNT_MANAGER:
