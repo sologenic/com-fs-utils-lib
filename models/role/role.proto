@@ -36,7 +36,8 @@ enum Role {
   TX_MARKETING_MANAGER = 20;
 
   // Manages user information, KYC stuff
-  // Deprecated Please use instead TX_KYC_MANAGER
+
+  // Deprecated: please use instead TX_KYC_MANAGER
   KYC_ADMINISTRATOR = 7;
   TX_KYC_MANAGER = 7;
 

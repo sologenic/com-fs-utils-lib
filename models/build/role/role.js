@@ -26,10 +26,7 @@ export var Role;
     Role[Role["TX_ACCOUNT_MANAGER"] = 8] = "TX_ACCOUNT_MANAGER";
     /** TX_MARKETING_MANAGER - Manages marketing aspects */
     Role[Role["TX_MARKETING_MANAGER"] = 20] = "TX_MARKETING_MANAGER";
-    /**
-     * KYC_ADMINISTRATOR - Manages user information, KYC stuff
-     * Deprecated Please use instead TX_KYC_MANAGER
-     */
+    /** KYC_ADMINISTRATOR - Deprecated: please use instead TX_KYC_MANAGER */
     Role[Role["KYC_ADMINISTRATOR"] = 7] = "KYC_ADMINISTRATOR";
     Role[Role["TX_KYC_MANAGER"] = 7] = "TX_KYC_MANAGER";
     /** PARTNER_BROKER_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */

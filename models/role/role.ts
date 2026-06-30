@@ -28,10 +28,7 @@ export enum Role {
   TX_ACCOUNT_MANAGER = 8,
   /** TX_MARKETING_MANAGER - Manages marketing aspects */
   TX_MARKETING_MANAGER = 20,
-  /**
-   * KYC_ADMINISTRATOR - Manages user information, KYC stuff
-   * Deprecated Please use instead TX_KYC_MANAGER
-   */
+  /** KYC_ADMINISTRATOR - Deprecated: please use instead TX_KYC_MANAGER */
   KYC_ADMINISTRATOR = 7,
   TX_KYC_MANAGER = 7,
   /** PARTNER_BROKER_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */

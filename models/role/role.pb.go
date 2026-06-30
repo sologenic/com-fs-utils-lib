@@ -40,8 +40,7 @@ const (
 	Role_TX_ACCOUNT_MANAGER Role = 8
 	// Manages marketing aspects
 	Role_TX_MARKETING_MANAGER Role = 20
-	// Manages user information, KYC stuff
-	// Deprecated Please use instead TX_KYC_MANAGER
+	// Deprecated: please use instead TX_KYC_MANAGER
 	Role_KYC_ADMINISTRATOR Role = 7
 	Role_TX_KYC_MANAGER    Role = 7
 	// TODO: Rename (get rid of "admin" and replace with "manager")
