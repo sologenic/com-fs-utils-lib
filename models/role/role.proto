@@ -5,6 +5,8 @@ package role;
 option go_package = "github.com/sologenic/com-fs-utils-lib/models/role;role";
 
 enum Role {
+  option allow_alias = true;
+
   NOT_USED_ROLE = 0;
 
   // End-user role
@@ -34,8 +36,9 @@ enum Role {
   TX_MARKETING_MANAGER = 20;
 
   // Manages user information, KYC stuff
-  // TODO: Rename to TX_KYC_MANAGER
+  // Deprecated Please use instead TX_KYC_MANAGER
   KYC_ADMINISTRATOR = 7;
+  TX_KYC_MANAGER = 7;
 
   // Partner scope hierarchy for broker
 
