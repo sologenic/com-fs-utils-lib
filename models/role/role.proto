@@ -12,7 +12,11 @@ enum Role {
 
   // Broker & asset management roles for an organization
   BROKER_ASSET_ADMINISTRATOR = 3;
+
   ORGANIZATION_ADMINISTRATOR = 4;
+
+  // Same as TX_SYSTEM_MANAGER but limited to organization admin belongs to
+  ORGANIZATION_SYSTEM_MANAGER = 22;
 
   // TX staff roles
 
