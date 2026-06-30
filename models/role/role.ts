@@ -15,6 +15,8 @@ export enum Role {
   /** BROKER_ASSET_ADMINISTRATOR - Broker & asset management roles for an organization */
   BROKER_ASSET_ADMINISTRATOR = 3,
   ORGANIZATION_ADMINISTRATOR = 4,
+  /** ORGANIZATION_SYSTEM_MANAGER - Same as TX_SYSTEM_MANAGER but limited to organization admin belongs to */
+  ORGANIZATION_SYSTEM_MANAGER = 22,
   /** TX_SYSTEM_MANAGER - Highest level of access including access to secrets and important settings */
   TX_SYSTEM_MANAGER = 21,
   /** TX_ADMINISTRATOR - Highest level of access excluding access to secrets and important settings */
@@ -62,6 +64,9 @@ export function roleFromJSON(object: any): Role {
     case 4:
     case "ORGANIZATION_ADMINISTRATOR":
       return Role.ORGANIZATION_ADMINISTRATOR;
+    case 22:
+    case "ORGANIZATION_SYSTEM_MANAGER":
+      return Role.ORGANIZATION_SYSTEM_MANAGER;
     case 21:
     case "TX_SYSTEM_MANAGER":
       return Role.TX_SYSTEM_MANAGER;
@@ -106,6 +111,8 @@ export function roleToJSON(object: Role): string {
       return "BROKER_ASSET_ADMINISTRATOR";
     case Role.ORGANIZATION_ADMINISTRATOR:
       return "ORGANIZATION_ADMINISTRATOR";
+    case Role.ORGANIZATION_SYSTEM_MANAGER:
+      return "ORGANIZATION_SYSTEM_MANAGER";
     case Role.TX_SYSTEM_MANAGER:
       return "TX_SYSTEM_MANAGER";
     case Role.TX_ADMINISTRATOR:

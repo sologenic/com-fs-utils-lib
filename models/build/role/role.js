@@ -13,6 +13,8 @@ export var Role;
     /** BROKER_ASSET_ADMINISTRATOR - Broker & asset management roles for an organization */
     Role[Role["BROKER_ASSET_ADMINISTRATOR"] = 3] = "BROKER_ASSET_ADMINISTRATOR";
     Role[Role["ORGANIZATION_ADMINISTRATOR"] = 4] = "ORGANIZATION_ADMINISTRATOR";
+    /** ORGANIZATION_SYSTEM_MANAGER - Same as TX_SYSTEM_MANAGER but limited to organization admin belongs to */
+    Role[Role["ORGANIZATION_SYSTEM_MANAGER"] = 22] = "ORGANIZATION_SYSTEM_MANAGER";
     /** TX_SYSTEM_MANAGER - Highest level of access including access to secrets and important settings */
     Role[Role["TX_SYSTEM_MANAGER"] = 21] = "TX_SYSTEM_MANAGER";
     /** TX_ADMINISTRATOR - Highest level of access excluding access to secrets and important settings */
@@ -59,6 +61,9 @@ export function roleFromJSON(object) {
         case 4:
         case "ORGANIZATION_ADMINISTRATOR":
             return Role.ORGANIZATION_ADMINISTRATOR;
+        case 22:
+        case "ORGANIZATION_SYSTEM_MANAGER":
+            return Role.ORGANIZATION_SYSTEM_MANAGER;
         case 21:
         case "TX_SYSTEM_MANAGER":
             return Role.TX_SYSTEM_MANAGER;
@@ -102,6 +107,8 @@ export function roleToJSON(object) {
             return "BROKER_ASSET_ADMINISTRATOR";
         case Role.ORGANIZATION_ADMINISTRATOR:
             return "ORGANIZATION_ADMINISTRATOR";
+        case Role.ORGANIZATION_SYSTEM_MANAGER:
+            return "ORGANIZATION_SYSTEM_MANAGER";
         case Role.TX_SYSTEM_MANAGER:
             return "TX_SYSTEM_MANAGER";
         case Role.TX_ADMINISTRATOR:

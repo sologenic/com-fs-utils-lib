@@ -6,6 +6,8 @@ export declare enum Role {
     /** BROKER_ASSET_ADMINISTRATOR - Broker & asset management roles for an organization */
     BROKER_ASSET_ADMINISTRATOR = 3,
     ORGANIZATION_ADMINISTRATOR = 4,
+    /** ORGANIZATION_SYSTEM_MANAGER - Same as TX_SYSTEM_MANAGER but limited to organization admin belongs to */
+    ORGANIZATION_SYSTEM_MANAGER = 22,
     /** TX_SYSTEM_MANAGER - Highest level of access including access to secrets and important settings */
     TX_SYSTEM_MANAGER = 21,
     /** TX_ADMINISTRATOR - Highest level of access excluding access to secrets and important settings */
