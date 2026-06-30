@@ -21,9 +21,10 @@ export declare enum Role {
     TX_MARKETING_MANAGER = 20,
     /**
      * KYC_ADMINISTRATOR - Manages user information, KYC stuff
-     * TODO: Rename to TX_KYC_MANAGER
+     * Deprecated Please use instead TX_KYC_MANAGER
      */
     KYC_ADMINISTRATOR = 7,
+    TX_KYC_MANAGER = 7,
     /** PARTNER_BROKER_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */
     PARTNER_BROKER_ADMIN = 10,
     /**

@@ -28,9 +28,10 @@ export var Role;
     Role[Role["TX_MARKETING_MANAGER"] = 20] = "TX_MARKETING_MANAGER";
     /**
      * KYC_ADMINISTRATOR - Manages user information, KYC stuff
-     * TODO: Rename to TX_KYC_MANAGER
+     * Deprecated Please use instead TX_KYC_MANAGER
      */
     Role[Role["KYC_ADMINISTRATOR"] = 7] = "KYC_ADMINISTRATOR";
+    Role[Role["TX_KYC_MANAGER"] = 7] = "TX_KYC_MANAGER";
     /** PARTNER_BROKER_ADMIN - TODO: Rename (get rid of "admin" and replace with "manager") */
     Role[Role["PARTNER_BROKER_ADMIN"] = 10] = "PARTNER_BROKER_ADMIN";
     /**
@@ -79,6 +80,9 @@ export function roleFromJSON(object) {
         case 7:
         case "KYC_ADMINISTRATOR":
             return Role.KYC_ADMINISTRATOR;
+        case 7:
+        case "TX_KYC_MANAGER":
+            return Role.TX_KYC_MANAGER;
         case 10:
         case "PARTNER_BROKER_ADMIN":
             return Role.PARTNER_BROKER_ADMIN;
@@ -119,6 +123,8 @@ export function roleToJSON(object) {
             return "TX_MARKETING_MANAGER";
         case Role.KYC_ADMINISTRATOR:
             return "KYC_ADMINISTRATOR";
+        case Role.TX_KYC_MANAGER:
+            return "TX_KYC_MANAGER";
         case Role.PARTNER_BROKER_ADMIN:
             return "PARTNER_BROKER_ADMIN";
         case Role.PARTNER_BROKER_ACCOUNT_MANAGER:
