@@ -11,9 +11,9 @@ import "buf/validate/validate.proto";
 message CommissionSettings {
   optional decimal.Decimal Commission = 25 [
     (buf.validate.field).cel = {
-      id: "commission_settings.commission.non_negative"
-      message: "Commission cannot be negative"
-      expression: "this.Value >= 0"
+      id: "commission_settings.commission.range"
+      message: "Commission must be between 0 and 10000 with at most 2 fraction digits"
+      expression: "this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0"
     }
   ]; // Commission charged for the order
   optional CommissionType CommissionType = 26 [
