@@ -9,7 +9,13 @@ import "buf/validate/validate.proto";
 
 // Broker API specific commission fields for user level (overrrides organization level)
 message CommissionSettings {
-  optional decimal.Decimal Commission = 25; // Commission charged for the order
+  optional decimal.Decimal Commission = 25 [
+    (buf.validate.field).cel = {
+      id: "commission_settings.commission.non_negative"
+      message: "Commission cannot be negative"
+      expression: "this.Value >= 0"
+    }
+  ]; // Commission charged for the order
   optional CommissionType CommissionType = 26 [
     (buf.validate.field).enum.defined_only = true
   ]; // How commission field value is calculated
