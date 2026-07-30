@@ -10,6 +10,7 @@ import "buf/validate/validate.proto";
 // Broker API specific commission fields for user level (overrrides organization level)
 message CommissionSettings {
   optional decimal.Decimal Commission = 25 [
+    (buf.validate.field).required = true,
     (buf.validate.field).cel = {
       id: "commission_settings.commission.range"
       message: "Commission must be between 0 and 10000 with at most 2 fraction digits"
@@ -17,7 +18,11 @@ message CommissionSettings {
     }
   ]; // Commission charged for the order
   optional CommissionType CommissionType = 26 [
-    (buf.validate.field).enum.defined_only = true
+    (buf.validate.field).required = true,
+    (buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }
   ]; // How commission field value is calculated
 }
 

@@ -8,14 +8,15 @@ Represents commission settings at the user level, which can override organizatio
 
 ### Fields
 
-- **`Commission`** (decimal.Decimal, optional): The commission amount charged for an order
-- **`CommissionType`** (CommissionType, optional): Specifies how the commission value is calculated
+- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Must be between 0 and 10000 with at most 2 fraction digits.
+- **`CommissionType`** (CommissionType, required): Specifies how the commission value is calculated. Must be a defined enum value other than `NOT_USED_COMMISSION_TYPE`.
 
 ### Usage
 
-This model is typically embedded in user-level configurations to allow per-user commission overrides. When both fields are set, they work together:
+This model is typically embedded in user-level configurations to allow per-user commission overrides. When `CommissionSettings` is provided, both fields are required and validated together:
 - `Commission` provides the base value
 - `CommissionType` determines how that value is applied
+- Requests with null/missing `Commission` or `CommissionType` are rejected and must not be persisted
 
 ## Enum: `CommissionType`
 
@@ -36,6 +37,7 @@ Defines the method by which commission is calculated.
 
 ### Notes
 
-- When `CommissionType` is not specified, `NOTIONAL` is typically used as the default
+- Both `Commission` and `CommissionType` are required whenever `CommissionSettings` is set
+- `NOT_USED_COMMISSION_TYPE` is not a valid value for persisted commission settings
 - For `BPS` calculations, ensure the commission value represents basis points (e.g., 25 for 0.25%)
 - The `decimal.Decimal` type ensures precise commission calculations without floating-point errors
