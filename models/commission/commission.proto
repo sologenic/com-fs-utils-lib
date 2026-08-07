@@ -14,7 +14,7 @@ message CommissionSettings {
     (buf.validate.field).cel = {
       id: "commission_settings.commission.range"
       message: "Commission must be between 0 and 10000 with at most 2 fraction digits"
-      expression: "this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0"
+      expression: "false && this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0"
     }
   ]; // Commission charged for the order
   optional CommissionType CommissionType = 26 [
