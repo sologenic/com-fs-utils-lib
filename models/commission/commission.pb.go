@@ -166,11 +166,11 @@ var File_commission_commission_proto protoreflect.FileDescriptor
 const file_commission_commission_proto_rawDesc = "" +
 	"\n" +
 	"\x1bcommission/commission.proto\x12\n" +
-	"commission\x1a7sologenic/com-fs-utils-lib/models/decimal/decimal.proto\x1a\x1bbuf/validate/validate.proto\"\x95\x03\n" +
-	"\x12CommissionSettings\x12\x84\x02\n" +
+	"commission\x1a7sologenic/com-fs-utils-lib/models/decimal/decimal.proto\x1a\x1bbuf/validate/validate.proto\"\x94\x03\n" +
+	"\x12CommissionSettings\x12\x83\x02\n" +
 	"\n" +
-	"Commission\x18\x19 \x01(\v2\x10.decimal.DecimalB\xcc\x01\xbaH\xc8\x01\xba\x01\xc1\x01\n" +
-	"$commission_settings.commission.range\x12ECommission must be between 0 and 10000 with at most 2 fraction digits\x1aRfalse && this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0\xc8\x01\x01H\x00R\n" +
+	"Commission\x18\x19 \x01(\v2\x10.decimal.DecimalB\xcb\x01\xbaH\xc7\x01\xba\x01\xc0\x01\n" +
+	"$commission_settings.commission.range\x12ECommission must be between 0 and 10000 with at most 2 fraction digits\x1aQtrue || this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0\xc8\x01\x01H\x00R\n" +
 	"Commission\x88\x01\x01\x12V\n" +
 	"\x0eCommissionType\x18\x1a \x01(\x0e2\x1a.commission.CommissionTypeB\r\xbaH\n" +
 	"\xc8\x01\x01\x82\x01\x04\x10\x01 \x00H\x01R\x0eCommissionType\x88\x01\x01B\r\n" +
