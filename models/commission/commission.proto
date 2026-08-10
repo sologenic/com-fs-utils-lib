@@ -14,9 +14,19 @@ message CommissionSettings {
     (buf.validate.field).cel = {
       id: "commission_settings.commission.range"
       message: "Commission must be between 0 and 10000 with at most 2 fraction digits"
-      expression: "true || this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0"
+      expression:
+        "this.Value >= 0 && this.Exp >= -2 && ("
+        "this.Value == 0 || "
+        "(this.Exp == -2 && this.Value <= 1000000) || "
+        "(this.Exp == -1 && this.Value <= 100000) || "
+        "(this.Exp == 0 && this.Value <= 10000) || "
+        "(this.Exp == 1 && this.Value <= 1000) || "
+        "(this.Exp == 2 && this.Value <= 100) || "
+        "(this.Exp == 3 && this.Value <= 10) || "
+        "(this.Exp == 4 && this.Value <= 1)"
+        ")"
     }
-  ]; // Commission charged for the order
+  ];
   optional CommissionType CommissionType = 26 [
     (buf.validate.field).required = true,
     (buf.validate.field).enum = {
@@ -29,7 +39,7 @@ message CommissionSettings {
 /**
  * CommissionType defines the specific method used to interpret and calculate
  * the commission charged to the end user for a given order.
- * 
+ *
  * SUBMISSION GUIDELINES:
  * When submitting an order, the actual commission value must be provided alongside
  * this enum as a string representing a numeric value (e.g., "1.50") to prevent
