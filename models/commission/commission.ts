@@ -97,16 +97,12 @@ export function commissionTypeToJSON(object: CommissionType): string {
 
 /** Broker API specific commission fields for user level (overrrides organization level) */
 export interface CommissionSettings {
-  /** Commission charged for the order */
-  Commission?:
-    | Decimal
-    | undefined;
-  /** How commission field value is calculated */
-  CommissionType?: CommissionType | undefined;
+  Commission: Decimal | undefined;
+  CommissionType: CommissionType;
 }
 
 function createBaseCommissionSettings(): CommissionSettings {
-  return { Commission: undefined, CommissionType: undefined };
+  return { Commission: undefined, CommissionType: 0 };
 }
 
 export const CommissionSettings = {
@@ -114,7 +110,7 @@ export const CommissionSettings = {
     if (message.Commission !== undefined) {
       Decimal.encode(message.Commission, writer.uint32(202).fork()).ldelim();
     }
-    if (message.CommissionType !== undefined) {
+    if (message.CommissionType !== 0) {
       writer.uint32(208).int32(message.CommissionType);
     }
     return writer;
@@ -153,7 +149,7 @@ export const CommissionSettings = {
   fromJSON(object: any): CommissionSettings {
     return {
       Commission: isSet(object.Commission) ? Decimal.fromJSON(object.Commission) : undefined,
-      CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : undefined,
+      CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : 0,
     };
   },
 
@@ -162,7 +158,7 @@ export const CommissionSettings = {
     if (message.Commission !== undefined) {
       obj.Commission = Decimal.toJSON(message.Commission);
     }
-    if (message.CommissionType !== undefined) {
+    if (message.CommissionType !== 0) {
       obj.CommissionType = commissionTypeToJSON(message.CommissionType);
     }
     return obj;
@@ -176,7 +172,7 @@ export const CommissionSettings = {
     message.Commission = (object.Commission !== undefined && object.Commission !== null)
       ? Decimal.fromPartial(object.Commission)
       : undefined;
-    message.CommissionType = object.CommissionType ?? undefined;
+    message.CommissionType = object.CommissionType ?? 0;
     return message;
   },
 };

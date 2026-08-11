@@ -111,8 +111,8 @@ func (CommissionType) EnumDescriptor() ([]byte, []int) {
 // Broker API specific commission fields for user level (overrrides organization level)
 type CommissionSettings struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Commission     *decimal.Decimal       `protobuf:"bytes,25,opt,name=Commission,proto3,oneof" json:"Commission,omitempty"`                                         // Commission charged for the order
-	CommissionType *CommissionType        `protobuf:"varint,26,opt,name=CommissionType,proto3,enum=commission.CommissionType,oneof" json:"CommissionType,omitempty"` // How commission field value is calculated
+	Commission     *decimal.Decimal       `protobuf:"bytes,25,opt,name=Commission,proto3" json:"Commission,omitempty"`
+	CommissionType CommissionType         `protobuf:"varint,26,opt,name=CommissionType,proto3,enum=commission.CommissionType" json:"CommissionType,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -155,8 +155,8 @@ func (x *CommissionSettings) GetCommission() *decimal.Decimal {
 }
 
 func (x *CommissionSettings) GetCommissionType() CommissionType {
-	if x != nil && x.CommissionType != nil {
-		return *x.CommissionType
+	if x != nil {
+		return x.CommissionType
 	}
 	return CommissionType_NOT_USED_COMMISSION_TYPE
 }
@@ -166,16 +166,16 @@ var File_commission_commission_proto protoreflect.FileDescriptor
 const file_commission_commission_proto_rawDesc = "" +
 	"\n" +
 	"\x1bcommission/commission.proto\x12\n" +
-	"commission\x1a7sologenic/com-fs-utils-lib/models/decimal/decimal.proto\x1a\x1bbuf/validate/validate.proto\"\x94\x03\n" +
-	"\x12CommissionSettings\x12\x83\x02\n" +
+	"commission\x1a7sologenic/com-fs-utils-lib/models/decimal/decimal.proto\x1a\x1bbuf/validate/validate.proto\"\x8f\x11\n" +
+	"\x12CommissionSettings\x128\n" +
 	"\n" +
-	"Commission\x18\x19 \x01(\v2\x10.decimal.DecimalB\xcb\x01\xbaH\xc7\x01\xba\x01\xc0\x01\n" +
-	"$commission_settings.commission.range\x12ECommission must be between 0 and 10000 with at most 2 fraction digits\x1aQtrue || this.Value >= 0 && this.Value <= 10000 && this.Exp >= -2 && this.Exp <= 0\xc8\x01\x01H\x00R\n" +
-	"Commission\x88\x01\x01\x12V\n" +
-	"\x0eCommissionType\x18\x1a \x01(\x0e2\x1a.commission.CommissionTypeB\r\xbaH\n" +
-	"\xc8\x01\x01\x82\x01\x04\x10\x01 \x00H\x01R\x0eCommissionType\x88\x01\x01B\r\n" +
-	"\v_CommissionB\x11\n" +
-	"\x0f_CommissionType*N\n" +
+	"Commission\x18\x19 \x01(\v2\x10.decimal.DecimalB\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"Commission\x12N\n" +
+	"\x0eCommissionType\x18\x1a \x01(\x0e2\x1a.commission.CommissionTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0eCommissionType:\xee\x0f\xbaH\xea\x0f\x1a\xa7\x05\n" +
+	"\"commission_settings.notional.range\x12NNOTIONAL commission must be between 0 and 10000 with at most 2 fraction digits\x1a\xb0\x04this.CommissionType != 1 || (this.Commission.Value >= 0 && this.Commission.Exp >= -2 && (this.Commission.Value == 0 || (this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || (this.Commission.Exp == -1 && this.Commission.Value <= 100000) || (this.Commission.Exp == 0 && this.Commission.Value <= 10000) || (this.Commission.Exp == 1 && this.Commission.Value <= 1000) || (this.Commission.Exp == 2 && this.Commission.Value <= 100) || (this.Commission.Exp == 3 && this.Commission.Value <= 10) || (this.Commission.Exp == 4 && this.Commission.Value <= 1)))\x1a\x9d\x05\n" +
+	"\x1dcommission_settings.qty.range\x12IQTY commission must be between 0 and 10000 with at most 2 fraction digits\x1a\xb0\x04this.CommissionType != 2 || (this.Commission.Value >= 0 && this.Commission.Exp >= -2 && (this.Commission.Value == 0 || (this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || (this.Commission.Exp == -1 && this.Commission.Value <= 100000) || (this.Commission.Exp == 0 && this.Commission.Value <= 10000) || (this.Commission.Exp == 1 && this.Commission.Value <= 1000) || (this.Commission.Exp == 2 && this.Commission.Value <= 100) || (this.Commission.Exp == 3 && this.Commission.Value <= 10) || (this.Commission.Exp == 4 && this.Commission.Value <= 1)))\x1a\x9d\x05\n" +
+	"\x1dcommission_settings.bps.range\x12IBPS commission must be between 0 and 10000 with at most 2 fraction digits\x1a\xb0\x04this.CommissionType != 3 || (this.Commission.Value >= 0 && this.Commission.Exp >= -2 && (this.Commission.Value == 0 || (this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || (this.Commission.Exp == -1 && this.Commission.Value <= 100000) || (this.Commission.Exp == 0 && this.Commission.Value <= 10000) || (this.Commission.Exp == 1 && this.Commission.Value <= 1000) || (this.Commission.Exp == 2 && this.Commission.Value <= 100) || (this.Commission.Exp == 3 && this.Commission.Value <= 10) || (this.Commission.Exp == 4 && this.Commission.Value <= 1)))*N\n" +
 	"\x0eCommissionType\x12\x1c\n" +
 	"\x18NOT_USED_COMMISSION_TYPE\x10\x00\x12\f\n" +
 	"\bNOTIONAL\x10\x01\x12\a\n" +
@@ -216,7 +216,6 @@ func file_commission_commission_proto_init() {
 	if File_commission_commission_proto != nil {
 		return
 	}
-	file_commission_commission_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

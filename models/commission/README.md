@@ -8,15 +8,27 @@ Represents commission settings at the user level, which can override organizatio
 
 ### Fields
 
-- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Must be between 0 and 10000 with at most 2 fraction digits.
+- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Stored as `Value * 10^Exp` (for example `"12.50"` is `{Value: 1250, Exp: -2}`). Validated per `CommissionType`.
 - **`CommissionType`** (CommissionType, required): Specifies how the commission value is calculated. Must be a defined enum value other than `NOT_USED_COMMISSION_TYPE`.
+
+### Per-type validation
+
+Each `CommissionType` has its own range rule (message-level protovalidate CEL):
+
+| Type | Meaning | Allowed `Commission` |
+| --- | --- | --- |
+| `NOTIONAL` | Flat per-order fee | `0`–`10000`, at most 2 fraction digits |
+| `QTY` | Per quantity/contract fee | `0`–`10000`, at most 2 fraction digits |
+| `BPS` | Basis points of order notional | `0`–`10000` bps, at most 2 fraction digits |
 
 ### Usage
 
 This model is typically embedded in user-level configurations to allow per-user commission overrides. When `CommissionSettings` is provided, both fields are required and validated together:
 - `Commission` provides the base value
-- `CommissionType` determines how that value is applied
-- Requests with null/missing `Commission` or `CommissionType` are rejected and must not be persisted
+- `CommissionType` determines how that value is applied and which range rule runs
+- Requests with null/missing `Commission` or `NOT_USED_COMMISSION_TYPE` are rejected and must not be persisted
+
+When submitting an order, provide the commission value as a numeric string (e.g. `"1.50"`) alongside `CommissionType` to avoid floating-point precision loss.
 
 ## Enum: `CommissionType`
 
@@ -25,19 +37,19 @@ Defines the method by which commission is calculated.
 ### Values
 
 - **`NOT_USED_COMMISSION_TYPE`** (0): Default/unused value
-- **`NOTIONAL`** (1): Charge commission on a per-order basis (default). The commission amount is applied directly to the order value
-- **`QTY`** (2): Charge commission on a per-quantity/contract basis, pro-rated. The commission is calculated based on the number of units
-- **`BPS`** (3): Commission expressed in basis points (percentage). The value is converted to a notional amount for commission calculation (max two decimal places). One basis point = 0.01%
+- **`NOTIONAL`** (1): Flat fee per order, regardless of quantity
+- **`QTY`** (2): Fee per quantity/contract, pro-rated (`quantity * commission`)
+- **`BPS`** (3): Fee in basis points of order notional (1 bps = 0.01%). Up to two decimal places.
 
 ### Example Scenarios
 
-- **NOTIONAL**: Fixed $10 commission per order
-- **QTY**: $0.50 commission per share/contract
-- **BPS**: 25 basis points (0.25%) of the order value
+- **NOTIONAL**: Submitted `"2.50"` → flat $2.50 commission for the order
+- **QTY**: Submitted `"0.05"` with quantity 100 → $5.00 total commission
+- **BPS**: Submitted `"12.50"` (12.50 bps / 0.125%) on a $10,000 notional → $12.50 total commission
 
 ### Notes
 
 - Both `Commission` and `CommissionType` are required whenever `CommissionSettings` is set
 - `NOT_USED_COMMISSION_TYPE` is not a valid value for persisted commission settings
-- For `BPS` calculations, ensure the commission value represents basis points (e.g., 25 for 0.25%)
+- For `BPS`, the commission value is basis points (e.g. `25` for 0.25%, or `12.50` for 0.125%)
 - The `decimal.Decimal` type ensures precise commission calculations without floating-point errors

@@ -52,10 +52,8 @@ export declare function commissionTypeFromJSON(object: any): CommissionType;
 export declare function commissionTypeToJSON(object: CommissionType): string;
 /** Broker API specific commission fields for user level (overrrides organization level) */
 export interface CommissionSettings {
-    /** Commission charged for the order */
-    Commission?: Decimal | undefined;
-    /** How commission field value is calculated */
-    CommissionType?: CommissionType | undefined;
+    Commission: Decimal | undefined;
+    CommissionType: CommissionType;
 }
 export declare const CommissionSettings: {
     encode(message: CommissionSettings, writer?: _m0.Writer): _m0.Writer;
