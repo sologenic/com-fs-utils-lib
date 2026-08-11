@@ -54,9 +54,9 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 			},
 		},
 		{
-			name: "valid max from float encoding Value=1 Exp=4",
+			name: "valid max from float encoding Value=1 Exp=2",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1, Exp: 4},
+				Commission:     &decimal.Decimal{Value: 1, Exp: 2},
 				CommissionType: CommissionType_QTY,
 			},
 		},
@@ -140,8 +140,24 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "bps above 10000 via positive exp",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 2, Exp: 4},
+				Commission:     &decimal.Decimal{Value: 2, Exp: 4}, // 20000
 				CommissionType: CommissionType_BPS,
+			},
+			wantErr: true,
+		},
+		{
+			name: "zero value but invalid exp (< -2)",
+			msg: &CommissionSettings{
+				Commission:     &decimal.Decimal{Value: 0, Exp: -3},
+				CommissionType: CommissionType_NOTIONAL,
+			},
+			wantErr: true,
+		},
+		{
+			name: "exp over 4 should fail even with value 1",
+			msg: &CommissionSettings{
+				Commission:     &decimal.Decimal{Value: 1, Exp: 5},
+				CommissionType: CommissionType_QTY,
 			},
 			wantErr: true,
 		},
@@ -151,7 +167,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			err := v.Validate(tt.msg)
 			if (err != nil) != tt.wantErr {
-				t.Fatalf("Validate() err=%v wantErr=%v", err, tt.wantErr)
+				t.Fatalf("Validate() err=%v, wantErr=%v", err, tt.wantErr)
 			}
 		})
 	}

@@ -24,7 +24,7 @@ message CommissionSettings {
     id: "commission_settings.notional.range"
     message: "NOTIONAL commission must be between 0 and 10000 with at most 2 fraction digits"
     expression:
-      "this.CommissionType != 1 || ("
+      "!has(this.Commission) || this.CommissionType != 1 || ("
       "this.Commission.Value >= 0 && this.Commission.Exp >= -2 && ("
       "this.Commission.Value == 0 || "
       "(this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || "
@@ -40,18 +40,16 @@ message CommissionSettings {
   // QTY: per-quantity/contract fee (e.g. "0.05" * qty).
   option (buf.validate.message).cel = {
     id: "commission_settings.qty.range"
-    message: "QTY commission must be between 0 and 10000 with at most 2 fraction digits"
+    message: "QTY commission must be between 0 and 100 with at most 2 fraction digits"
     expression:
-      "this.CommissionType != 2 || ("
+      "!has(this.Commission) || this.CommissionType != 2 || ("
       "this.Commission.Value >= 0 && this.Commission.Exp >= -2 && ("
       "this.Commission.Value == 0 || "
-      "(this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || "
-      "(this.Commission.Exp == -1 && this.Commission.Value <= 100000) || "
-      "(this.Commission.Exp == 0 && this.Commission.Value <= 10000) || "
-      "(this.Commission.Exp == 1 && this.Commission.Value <= 1000) || "
-      "(this.Commission.Exp == 2 && this.Commission.Value <= 100) || "
-      "(this.Commission.Exp == 3 && this.Commission.Value <= 10) || "
-      "(this.Commission.Exp == 4 && this.Commission.Value <= 1)"
+      "(this.Commission.Exp == -2 && this.Commission.Value <= 10000) || " // 100.00
+      "(this.Commission.Exp == -1 && this.Commission.Value <= 1000) || "  // 100.0
+      "(this.Commission.Exp == 0 && this.Commission.Value <= 100) || "    // 100
+      "(this.Commission.Exp == 1 && this.Commission.Value <= 10) || "     // 10e1
+      "(this.Commission.Exp == 2 && this.Commission.Value <= 1)"          // 1e2
       "))"
   };
 
@@ -60,7 +58,7 @@ message CommissionSettings {
     id: "commission_settings.bps.range"
     message: "BPS commission must be between 0 and 10000 with at most 2 fraction digits"
     expression:
-      "this.CommissionType != 3 || ("
+      "!has(this.Commission) || this.CommissionType != 3 || ("
       "this.Commission.Value >= 0 && this.Commission.Exp >= -2 && ("
       "this.Commission.Value == 0 || "
       "(this.Commission.Exp == -2 && this.Commission.Value <= 1000000) || "
