@@ -8,15 +8,25 @@ Represents commission settings at the user level, which can override organizatio
 
 ### Fields
 
-- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Must be between 0 and 10000 with at most 2 fraction digits. Stored as `Value * 10^Exp` (for example `"12.50"` is `{Value: 1250, Exp: -2}`).
+- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Stored as `Value * 10^Exp` (for example `"12.50"` is `{Value: 1250, Exp: -2}`). Validated per `CommissionType`.
 - **`CommissionType`** (CommissionType, required): Specifies how the commission value is calculated. Must be a defined enum value other than `NOT_USED_COMMISSION_TYPE`.
+
+### Per-type validation
+
+Each `CommissionType` has its own range rule (message-level protovalidate CEL):
+
+| Type | Meaning | Allowed `Commission` |
+| --- | --- | --- |
+| `NOTIONAL` | Flat per-order fee | `0`–`10000`, at most 2 fraction digits |
+| `QTY` | Per quantity/contract fee | `0`–`10000`, at most 2 fraction digits |
+| `BPS` | Basis points of order notional | `0`–`10000` bps, at most 2 fraction digits |
 
 ### Usage
 
 This model is typically embedded in user-level configurations to allow per-user commission overrides. When `CommissionSettings` is provided, both fields are required and validated together:
 - `Commission` provides the base value
-- `CommissionType` determines how that value is applied
-- Requests with null/missing `Commission` or `CommissionType` are rejected and must not be persisted
+- `CommissionType` determines how that value is applied and which range rule runs
+- Requests with null/missing `Commission` or `NOT_USED_COMMISSION_TYPE` are rejected and must not be persisted
 
 When submitting an order, provide the commission value as a numeric string (e.g. `"1.50"`) alongside `CommissionType` to avoid floating-point precision loss.
 

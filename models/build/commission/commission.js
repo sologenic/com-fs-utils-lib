@@ -91,14 +91,14 @@ export function commissionTypeToJSON(object) {
     }
 }
 function createBaseCommissionSettings() {
-    return { Commission: undefined, CommissionType: undefined };
+    return { Commission: undefined, CommissionType: 0 };
 }
 export const CommissionSettings = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.Commission !== undefined) {
             Decimal.encode(message.Commission, writer.uint32(202).fork()).ldelim();
         }
-        if (message.CommissionType !== undefined) {
+        if (message.CommissionType !== 0) {
             writer.uint32(208).int32(message.CommissionType);
         }
         return writer;
@@ -133,7 +133,7 @@ export const CommissionSettings = {
     fromJSON(object) {
         return {
             Commission: isSet(object.Commission) ? Decimal.fromJSON(object.Commission) : undefined,
-            CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : undefined,
+            CommissionType: isSet(object.CommissionType) ? commissionTypeFromJSON(object.CommissionType) : 0,
         };
     },
     toJSON(message) {
@@ -141,7 +141,7 @@ export const CommissionSettings = {
         if (message.Commission !== undefined) {
             obj.Commission = Decimal.toJSON(message.Commission);
         }
-        if (message.CommissionType !== undefined) {
+        if (message.CommissionType !== 0) {
             obj.CommissionType = commissionTypeToJSON(message.CommissionType);
         }
         return obj;
@@ -155,7 +155,7 @@ export const CommissionSettings = {
         message.Commission = (object.Commission !== undefined && object.Commission !== null)
             ? Decimal.fromPartial(object.Commission)
             : undefined;
-        message.CommissionType = (_a = object.CommissionType) !== null && _a !== void 0 ? _a : undefined;
+        message.CommissionType = (_a = object.CommissionType) !== null && _a !== void 0 ? _a : 0;
         return message;
     },
 };
