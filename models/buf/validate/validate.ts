@@ -192,7 +192,7 @@ export function knownRegexToJSON(object: KnownRegex): string {
  * `Rule` represents a validation rule written in the Common Expression
  * Language (CEL) syntax. Each Rule includes a unique identifier, an
  * optional error message, and the CEL expression to evaluate. For more
- * information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+ * information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
  *
  * ```proto
  * message Foo {
@@ -244,7 +244,7 @@ export interface MessageRules {
    * simpler syntax when defining CEL Rules where `id` and `message` derived from the `expression`. `id` will
    * be same as the `expression`.
    *
-   * For more information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * For more information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -260,7 +260,7 @@ export interface MessageRules {
   /**
    * `cel` is a repeated field of type Rule. Each Rule specifies a validation rule to be applied to this message.
    * These rules are written in Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -364,7 +364,7 @@ export interface FieldRules {
    * simpler syntax when defining CEL Rules where `id` and `message` derived from the `expression`. `id` will
    * be same as the `expression`.
    *
-   * For more information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * For more information, [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -377,7 +377,7 @@ export interface FieldRules {
   /**
    * `cel` is a repeated field used to represent a textual expression
    * in the Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/custom-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -508,7 +508,7 @@ export interface PredefinedRules {
   /**
    * `cel` is a repeated field used to represent a textual expression
    * in the Common Expression Language (CEL) syntax. For more information,
-   * [see our documentation](https://buf.build/docs/protovalidate/schemas/predefined-rules/).
+   * [see our documentation](https://protovalidate.com/schemas/predefined-rules/).
    *
    * ```proto
    * message MyMessage {
@@ -2583,9 +2583,13 @@ export interface StringRules {
     | boolean
     | undefined;
   /**
-   * `uuid` specifies that the field value must be a valid UUID as defined by
-   * [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2). If the
-   * field value isn't a valid UUID, an error message will be generated.
+   * `uuid` specifies that the field value must have the textual shape of a
+   * UUID as defined by
+   * [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562#section-4): 32
+   * hexadecimal digits in five dash-separated groups. Only the shape is
+   * enforced, so that UUID versions defined in the future are not rejected:
+   * the version and variant fields are not checked. If the field value isn't
+   * shaped like a UUID, an error message will be generated.
    *
    * ```proto
    * message MyString {
@@ -2598,10 +2602,13 @@ export interface StringRules {
     | boolean
     | undefined;
   /**
-   * `tuuid` (trimmed UUID) specifies that the field value must be a valid UUID as
-   * defined by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2) with all dashes
-   * omitted. If the field value isn't a valid UUID without dashes, an error message
-   * will be generated.
+   * `tuuid` (trimmed UUID) specifies that the field value must have the
+   * textual shape of a UUID as defined by
+   * [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562#section-4) with all
+   * dashes omitted: 32 hexadecimal digits. Only the shape is enforced, so
+   * that UUID versions defined in the future are not rejected: the version
+   * and variant fields are not checked. If the field value isn't shaped like
+   * a UUID without dashes, an error message will be generated.
    *
    * ```proto
    * message MyString {
@@ -3065,10 +3072,12 @@ export interface BytesRules {
     | boolean
     | undefined;
   /**
-   * `uuid` ensures that the field value encodes 128-bit UUID data as defined
-   * by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2).
-   * The field must contain exactly 16 bytes representing the UUID. If the
-   * field value isn't a valid UUID, an error message will be generated.
+   * `uuid` ensures that the field `value` is exactly 16 bytes long,
+   * the size of a UUID in binary form as defined by
+   * [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562#section-4).
+   * Only the length is enforced: the version and variant fields
+   * are not checked, and any 16 bytes are accepted.
+   * If the field value doesn't meet this rule, an error message is generated.
    *
    * ```proto
    * message MyBytes {
