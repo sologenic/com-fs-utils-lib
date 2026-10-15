@@ -20,8 +20,8 @@ github.com/rodaine/protogofakeit v0.1.1 h1:ZKouljuRM3A+TArppfBqnH8tGZHOwM/pjvtXe
 github.com/rodaine/protogofakeit v0.1.1/go.mod h1:pXn/AstBYMaSfc1/RqH3N82pBuxtWgejz1AlYpY1mI0=
 github.com/shopspring/decimal v1.4.0 h1:bxl37RwXBklmTi0C79JfXCEBD1cqqHt0bbgBAGFp81k=
 github.com/shopspring/decimal v1.4.0/go.mod h1:gawqmDU56v4yIKSwfBSFip1HdCCXN8/+DMd9qYNcwME=
-github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015110813-d6c66f375d07 h1:lahItT/H6blZ7SVmcoPq8oAgr3OX6wXQNSADl89bz5s=
-github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015110813-d6c66f375d07/go.mod h1:pCDpq/9UhLmlWs/p9VseNInhU6b9KHGm/bjQrN4t/WQ=
+github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015123032-184bc4cdff9a h1:gfBHwJMchBoe8Vzpqn608+7xRr1vOJYnxaPxXfXs4HE=
+github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015123032-184bc4cdff9a/go.mod h1:pCDpq/9UhLmlWs/p9VseNInhU6b9KHGm/bjQrN4t/WQ=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 go.yaml.in/yaml/v3 v3.0.4 h1:tfq32ie2Jv2UxXFdLJdh3jXuOzWiL1fo0bu/FbuKpbc=

@@ -5,7 +5,7 @@ go 1.27.1
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260709200747-435963d16310.1
 	buf.build/go/protovalidate v1.2.0
-	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015110813-d6c66f375d07
+	github.com/sologenic/com-fs-utils-lib/models/decimal v0.0.0-20261015123032-184bc4cdff9a
 	google.golang.org/protobuf v1.36.11
 )
 
