@@ -4,7 +4,7 @@ go 1.27.1
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1
-	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261015114510-759dd7e97daf
+	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20261017193901-4a442f37bf82
 	google.golang.org/protobuf v1.36.11
 )
 
