@@ -1,4 +1,3 @@
-export * from "./http-method"
 export * from "./metadata"
 export * from "./role"
 export * from "./audit"
