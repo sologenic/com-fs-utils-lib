@@ -1,0 +1,47 @@
+# THIS FILE IS AUTO-GENERATED. DO NOT EDIT!
+
+name: Go Code Quality Check
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  quality-check:
+    name: Go Code Quality Check
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/checkout
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # https://github.com/actions/setup-go
+      - name: Setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: "go.mod"
+          cache: true
+
+      - name: Configure Git for private modules
+        env:
+          TOKEN: ${{ secrets.REPOSITORY_READ_ONLY_PAT }}
+        run: |
+          git config --global url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
+
+      - name: Download dependencies
+        env:
+          GOPRIVATE: "github.com/sologenic/*"
+        run: go mod download
+
+      # https://github.com/golangci/golangci-lint-action
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        env:
+          GOPRIVATE: "github.com/sologenic/*"
+          GIT_TERMINAL_PROMPT: "0"
+        with:
+          version: v2.14.0
