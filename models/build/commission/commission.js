@@ -5,7 +5,7 @@
 // source: commission/commission.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Decimal } from "../sologenic/com-fs-utils-lib/models/decimal/decimal";
+import { Decimal } from "../google/type/decimal";
 export const protobufPackage = "commission";
 /**
  * CommissionType defines the specific method used to interpret and calculate

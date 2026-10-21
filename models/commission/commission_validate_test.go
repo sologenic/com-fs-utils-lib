@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"buf.build/go/protovalidate"
-	"github.com/sologenic/com-fs-utils-lib/models/decimal"
+	"google.golang.org/genproto/googleapis/type/decimal"
 )
 
 func TestCommissionSettingsProtovalidate(t *testing.T) {
@@ -21,56 +21,56 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "valid notional 2.50",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 250, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "2.50"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 		},
 		{
 			name: "valid qty 0.05",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 5, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "0.05"},
 				CommissionType: CommissionType_QTY,
 			},
 		},
 		{
 			name: "valid bps 12.50",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1250, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "12.50"},
 				CommissionType: CommissionType_BPS,
 			},
 		},
 		{
 			name: "valid max 10000 integer bps",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 10000, Exp: 0},
+				Commission:     &decimal.Decimal{Value: "10000"},
 				CommissionType: CommissionType_BPS,
 			},
 		},
 		{
 			name: "valid max 10000.00 notional",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1000000, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "10000.00"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 		},
 		{
-			name: "valid max from float encoding Value=1 Exp=2",
+			name: "valid max qty 100",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1, Exp: 2},
+				Commission:     &decimal.Decimal{Value: "100"},
 				CommissionType: CommissionType_QTY,
 			},
 		},
 		{
 			name: "valid 100.01 notional",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 10001, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "100.01"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 		},
 		{
 			name: "valid zero bps",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 0, Exp: 0},
+				Commission:     &decimal.Decimal{Value: "0"},
 				CommissionType: CommissionType_BPS,
 			},
 		},
@@ -84,7 +84,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "unused commission type",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 25, Exp: 0},
+				Commission:     &decimal.Decimal{Value: "25"},
 				CommissionType: CommissionType_NOT_USED_COMMISSION_TYPE,
 			},
 			wantErr: true,
@@ -92,7 +92,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "negative notional",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: -1, Exp: 0},
+				Commission:     &decimal.Decimal{Value: "-1"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 			wantErr: true,
@@ -100,7 +100,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "negative qty",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: -5, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "-0.05"},
 				CommissionType: CommissionType_QTY,
 			},
 			wantErr: true,
@@ -108,7 +108,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "negative bps",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: -1, Exp: 0},
+				Commission:     &decimal.Decimal{Value: "-1"},
 				CommissionType: CommissionType_BPS,
 			},
 			wantErr: true,
@@ -116,7 +116,7 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "bps more than 2 fraction digits",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1, Exp: -3},
+				Commission:     &decimal.Decimal{Value: "0.001"},
 				CommissionType: CommissionType_BPS,
 			},
 			wantErr: true,
@@ -124,39 +124,39 @@ func TestCommissionSettingsProtovalidate(t *testing.T) {
 		{
 			name: "notional more than 2 fraction digits",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1, Exp: -3},
+				Commission:     &decimal.Decimal{Value: "0.001"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 			wantErr: true,
 		},
 		{
-			name: "qty above 10000",
+			name: "qty above 100",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1000001, Exp: -2},
+				Commission:     &decimal.Decimal{Value: "100.01"},
 				CommissionType: CommissionType_QTY,
 			},
 			wantErr: true,
 		},
 		{
-			name: "bps above 10000 via positive exp",
+			name: "bps above 10000",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 2, Exp: 4}, // 20000
+				Commission:     &decimal.Decimal{Value: "20000"},
 				CommissionType: CommissionType_BPS,
 			},
 			wantErr: true,
 		},
 		{
-			name: "zero value but invalid exp (< -2)",
+			name: "zero value but invalid fraction digits",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 0, Exp: -3},
+				Commission:     &decimal.Decimal{Value: "0.000"},
 				CommissionType: CommissionType_NOTIONAL,
 			},
 			wantErr: true,
 		},
 		{
-			name: "exp over 4 should fail even with value 1",
+			name: "exponent form rejected",
 			msg: &CommissionSettings{
-				Commission:     &decimal.Decimal{Value: 1, Exp: 5},
+				Commission:     &decimal.Decimal{Value: "1e2"},
 				CommissionType: CommissionType_QTY,
 			},
 			wantErr: true,

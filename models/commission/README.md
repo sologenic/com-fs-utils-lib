@@ -8,7 +8,7 @@ Represents commission settings at the user level, which can override organizatio
 
 ### Fields
 
-- **`Commission`** (decimal.Decimal, required): The commission amount charged for an order. Stored as `Value * 10^Exp` (for example `"12.50"` is `{Value: 1250, Exp: -2}`). Validated per `CommissionType`.
+- **`Commission`** (google.type.Decimal, required): The commission amount charged for an order. Stored as a decimal string in `value` (for example `"12.50"`). Validated per `CommissionType`.
 - **`CommissionType`** (CommissionType, required): Specifies how the commission value is calculated. Must be a defined enum value other than `NOT_USED_COMMISSION_TYPE`.
 
 ### Per-type validation
@@ -18,8 +18,10 @@ Each `CommissionType` has its own range rule (message-level protovalidate CEL):
 | Type | Meaning | Allowed `Commission` |
 | --- | --- | --- |
 | `NOTIONAL` | Flat per-order fee | `0`–`10000`, at most 2 fraction digits |
-| `QTY` | Per quantity/contract fee | `0`–`10000`, at most 2 fraction digits |
+| `QTY` | Per quantity/contract fee | `0`–`100`, at most 2 fraction digits |
 | `BPS` | Basis points of order notional | `0`–`10000` bps, at most 2 fraction digits |
+
+Values must be non-negative decimal strings with no exponent (for example `"2.50"`, not `"1e2"`).
 
 ### Usage
 
@@ -52,4 +54,4 @@ Defines the method by which commission is calculated.
 - Both `Commission` and `CommissionType` are required whenever `CommissionSettings` is set
 - `NOT_USED_COMMISSION_TYPE` is not a valid value for persisted commission settings
 - For `BPS`, the commission value is basis points (e.g. `25` for 0.25%, or `12.50` for 0.125%)
-- The `decimal.Decimal` type ensures precise commission calculations without floating-point errors
+- `google.type.Decimal` stores the amount as a string so commission calculations keep exact precision

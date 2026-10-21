@@ -4,6 +4,9 @@ set -e
 mkdir -p dependencies/buf/validate
 curl https://raw.githubusercontent.com/bufbuild/protovalidate/refs/heads/main/proto/protovalidate/buf/validate/validate.proto > dependencies/buf/validate/validate.proto
 
+mkdir -p dependencies/google/type
+curl https://raw.githubusercontent.com/googleapis/googleapis/refs/heads/master/google/type/decimal.proto > dependencies/google/type/decimal.proto
+
 PROTO_DIR=$(dirname $(dirname "$0"))
 cd $PROTO_DIR
 

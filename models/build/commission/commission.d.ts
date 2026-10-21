@@ -1,5 +1,5 @@
 import _m0 from "protobufjs/minimal";
-import { Decimal } from "../sologenic/com-fs-utils-lib/models/decimal/decimal";
+import { Decimal } from "../google/type/decimal";
 export declare const protobufPackage = "commission";
 /**
  * CommissionType defines the specific method used to interpret and calculate
@@ -62,34 +62,28 @@ export declare const CommissionSettings: {
     toJSON(message: CommissionSettings): unknown;
     create<I extends {
         Commission?: {
-            Value?: number | undefined;
-            Exp?: number | undefined;
+            value?: string | undefined;
         } | undefined;
         CommissionType?: CommissionType | undefined;
     } & {
         Commission?: ({
-            Value?: number | undefined;
-            Exp?: number | undefined;
+            value?: string | undefined;
         } & {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & { [K in Exclude<keyof I["Commission"], keyof Decimal>]: never; }) | undefined;
+            value?: string | undefined;
+        } & { [K in Exclude<keyof I["Commission"], "value">]: never; }) | undefined;
         CommissionType?: CommissionType | undefined;
     } & { [K_1 in Exclude<keyof I, keyof CommissionSettings>]: never; }>(base?: I | undefined): CommissionSettings;
     fromPartial<I_1 extends {
         Commission?: {
-            Value?: number | undefined;
-            Exp?: number | undefined;
+            value?: string | undefined;
         } | undefined;
         CommissionType?: CommissionType | undefined;
     } & {
         Commission?: ({
-            Value?: number | undefined;
-            Exp?: number | undefined;
+            value?: string | undefined;
         } & {
-            Value?: number | undefined;
-            Exp?: number | undefined;
-        } & { [K_2 in Exclude<keyof I_1["Commission"], keyof Decimal>]: never; }) | undefined;
+            value?: string | undefined;
+        } & { [K_2 in Exclude<keyof I_1["Commission"], "value">]: never; }) | undefined;
         CommissionType?: CommissionType | undefined;
     } & { [K_3 in Exclude<keyof I_1, keyof CommissionSettings>]: never; }>(object: I_1): CommissionSettings;
 };
