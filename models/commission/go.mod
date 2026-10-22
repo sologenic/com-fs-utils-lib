@@ -1,6 +1,6 @@
 module github.com/sologenic/com-fs-utils-lib/models/commission
 
-go 1.27.1
+go 1.27.3
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260709200747-435963d16310.1
